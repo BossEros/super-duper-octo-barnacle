@@ -52,6 +52,7 @@ namespace ASI.Basecode.WebApp.Controllers
             if(ModelState.IsValid)
             {
                 _bookService.UpdateBook(book);
+                TempData["SuccessMessage"] = "Book updated successfully!";  
                 return RedirectToAction("Index");
             }
 
@@ -62,7 +63,6 @@ namespace ASI.Basecode.WebApp.Controllers
         public IActionResult Delete(int bookId)
         {
             _bookService.DeleteBook(bookId);
-
             return RedirectToAction("Index");
         }
     }

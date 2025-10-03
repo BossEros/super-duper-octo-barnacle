@@ -1,6 +1,16 @@
 @model IEnumerable<ASI.Basecode.Data.Models.Book>
 
 <div class="container pt-5">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
     <a asp-controller="Book" asp-action="Create" class="btn btn-outline-primary mb-3">Create Book</a>
 
     <div class="row">
@@ -21,7 +31,35 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">@book.CreatedTime.ToString("dd/MM/yyyy")</small>
                             </div>
-                            <a asp-controller="Book" asp-action="Update" method="get" asp-route-id="@book.Id" class="btn btn-primary btn-sm mt-2">Edit</a>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <a asp-controller="Book" asp-action="Update" method="get" asp-route-id="@book.Id" class="btn btn-primary btn-sm">Edit</a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal-@book.Id">Delete</button>
+                            </div>
+                            
+
+                            <!-- Delete Confirmation Modal -->
+                            <div class="modal fade" id="deleteModal-@book.Id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete "<strong>@book.Title</strong>"?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <form asp-controller="Book" asp-action="Delete" asp-route-bookId="@book.Id" method="post" style="display:inline;">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
