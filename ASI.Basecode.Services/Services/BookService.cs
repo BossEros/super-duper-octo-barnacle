@@ -40,5 +40,33 @@ namespace ASI.Basecode.Services.Services
 
             _bookRepository.AddBook(newBook);
         }
+
+        public Book GetBookById(int bookId)
+        {
+            return _bookRepository.GetBookById(bookId);
+        }
+
+        public void UpdateBook(Book book)
+        {
+            if(book == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var existingBook = _bookRepository.GetBookById(book.Id);
+            if(existingBook != null)
+            {
+                existingBook.Title = book.Title;
+                existingBook.Description = book.Description;
+                existingBook.Author = book.Author;
+
+                _bookRepository.UpdateBook(existingBook);
+            }
+        }
+
+        public void DeleteBook(int bookId)
+        {
+            _bookRepository.DeleteBook(bookId);
+        }
     }
 }

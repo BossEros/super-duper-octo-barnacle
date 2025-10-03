@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASI.Basecode.Data.Models.Book>
+@model IEnumerable<ASI.Basecode.Data.Models.Book>
 
 <div class="container pt-5">
     <a asp-controller="Book" asp-action="Create" class="btn btn-outline-primary mb-3">Create Book</a>
@@ -21,6 +21,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">@book.CreatedTime.ToString("dd/MM/yyyy")</small>
                             </div>
+                            <a asp-controller="Book" asp-action="Update" method="get" asp-route-id="@book.Id" class="btn btn-primary btn-sm mt-2">Edit</a>
                         </div>
                     </div>
                 </div>

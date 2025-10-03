@@ -27,5 +27,25 @@ namespace ASI.Basecode.Data.Repositories
             _dbContext.Books.Add(book);
             _dbContext.SaveChanges();
         }
+
+        public Book GetBookById(int Id){
+            return _dbContext.Books.FirstOrDefault(b => b.Id == Id);
+        }
+
+        public void UpdateBook(Book book)
+        {
+            _dbContext.Books.Update(book);
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteBook(int bookId)
+        {
+            var book = _dbContext.Books.Find(bookId);
+            if (book != null)
+            {
+                _dbContext.Books.Remove(book);
+                _dbContext.SaveChanges();
+            }
+        }
     }
 }

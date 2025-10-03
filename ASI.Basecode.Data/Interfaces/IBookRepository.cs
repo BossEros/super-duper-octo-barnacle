@@ -12,5 +12,8 @@ namespace ASI.Basecode.Data.Interfaces
         List<Book> ViewBooks();
 
         void AddBook(Book book);
+        void DeleteBook(int bookId);
+        void UpdateBook(Book book);
+        Book GetBookById(int bookId);
     }
 }
